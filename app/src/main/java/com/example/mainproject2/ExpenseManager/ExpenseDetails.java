@@ -70,6 +70,8 @@ public class ExpenseDetails extends AppCompatActivity {
 
         pbs = findViewById(R.id.pbs);
 
+        getSupportActionBar().setTitle("Expense Manager");
+
         rvTransactions.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setReverseLayout(true);

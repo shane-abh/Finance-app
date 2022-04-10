@@ -73,9 +73,11 @@ public class StockPage extends AppCompatActivity {
         VPAdapter vpAdapter = new VPAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         Intent intent = getIntent();
         String str = intent.getStringExtra("message");
+        String name = intent.getStringExtra("name");
 
         Bundle bundle = new Bundle();
         bundle.putString("message", str);
+        getSupportActionBar().setTitle(name);
 
         StockFragment stockFragment = new StockFragment();
         stockFragment.setArguments(bundle);

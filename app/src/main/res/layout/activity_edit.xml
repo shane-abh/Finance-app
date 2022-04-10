@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context=".PaymentReminder.EditActivity">
+    tools:context=".PaymentReminder.EditActivity"
+    android:background="@drawable/background">
 
     <ScrollView
         android:layout_height="0dp"
@@ -27,7 +28,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:singleLine="true"
-                android:background="@drawable/edittext_border"/>
+                android:background="@drawable/edittext_border"
+                android:paddingLeft="10dp"/>
 
             <TextView
                 style="@style/widget"
@@ -59,7 +61,8 @@
                 android:inputType="numberDecimal"
                 android:background="@drawable/edittext_border"
                 android:padding="10dp"
-                android:hint="0.00" />
+                android:hint="0.00"
+                android:paddingLeft="10dp"/>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:paddingTop="8sp"
@@ -89,7 +92,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:layout_gravity="center"
-                    android:onClick="onDateClick" />
+                    android:onClick="onDateClick"
+                    android:backgroundTint="@color/buttons"/>
 
                 <Button
                     android:id="@+id/time_button"
@@ -97,7 +101,8 @@
                     android:layout_width="0sp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:onClick="onTimeClick" />
+                    android:onClick="onTimeClick"
+                    android:backgroundTint="@color/buttons"/>
 
             </LinearLayout>
 
@@ -170,6 +175,7 @@
         android:id="@+id/googlecalendar"
         android:layout_margin="10dp"
         android:drawableLeft="@drawable/add"
+        android:backgroundTint="@color/buttons"
         />
 
 
@@ -183,13 +189,15 @@
             style="@style/edit_button"
             android:id="@+id/done"
             android:text="Done"
-            android:onClick="onDoneClick" />
+            android:onClick="onDoneClick"
+            android:backgroundTint="@color/buttons"/>
 
         <Button
             style="@style/edit_button"
             android:id="@+id/cancel"
             android:text="Cancel"
-            android:onClick="onCancelClick" />
+            android:onClick="onCancelClick"
+            android:backgroundTint="@color/buttons"/>
 
 
     </LinearLayout>

@@ -82,6 +82,8 @@ public class ExpenseCalculatorMain extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        getSupportActionBar().setTitle("Expense Manager");
+
 
         details = findViewById(R.id.Details);
         details.setOnClickListener(new View.OnClickListener() {

@@ -36,9 +36,9 @@ public class PersonalBalanceStatement extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_balance_statement);
-        Random random = new Random();
-        int rowNumber = 3;
-        int columnNumber = 2;
+
+
+        getSupportActionBar().setTitle("Personal Balance Statement");
 
         table = findViewById(R.id.tableInvoices);
         fb = new FirebaseAdapter();

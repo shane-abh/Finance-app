@@ -26,6 +26,8 @@ public class IncomeStatement extends AppCompatActivity {
         viewPager = findViewById(R.id.viewpager);
         viewPager.setPagingEnabled(false);
 
+        getSupportActionBar().setTitle("Income Statement");
+
         tabLayout.setupWithViewPager(viewPager);
 
         VPAdapter vpAdapter = new VPAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);

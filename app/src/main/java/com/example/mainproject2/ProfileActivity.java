@@ -12,6 +12,7 @@ import com.example.mainproject2.ExpenseManager.TrialActivity;
 import com.example.mainproject2.PaymentReminder.DashBoardActivity;
 import com.example.mainproject2.StockPlatform.RealTimePriceAlert;
 import com.example.mainproject2.StockPlatform.Search;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -21,6 +22,11 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        getSupportActionBar().setTitle("Home");
+//        getSupportActionBar().setLogo(R.drawable.home);
+
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         expenseCalculator = findViewById(R.id.expenseCalculator);
         investmentPlatform = findViewById(R.id.investmentPlatform);

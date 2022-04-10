@@ -56,6 +56,8 @@ public class MyPortfolioActivity extends AppCompatActivity {
         fab = findViewById(R.id.fab);
         refresh = findViewById(R.id.refresh);
 
+        getSupportActionBar().setTitle("My Portfolio");
+
         nav_view = findViewById(R.id.nav_view);
         Navigation_drawer();
 

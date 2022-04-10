@@ -46,6 +46,8 @@ public class RealTimePriceAlert extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        getSupportActionBar().setTitle("Real-Time price alert");
+
         WebView webView = findViewById(R.id.webview);
         //priceAlert works
         webView.loadUrl("file:///android_asset/select.html");

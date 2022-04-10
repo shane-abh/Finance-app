@@ -49,7 +49,7 @@ public class Search extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         databaseReferenceSearch = FirebaseDatabase.getInstance().getReference().child("Search");
         listView = findViewById(R.id.listView);
         listView.setClickable(true);
@@ -146,14 +146,17 @@ public class Search extends AppCompatActivity {
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 Toast.makeText(getApplicationContext(),adapter.getItem(position),Toast.LENGTH_SHORT).show();
                                 String key = "1";
+                                String value="";
                                 for(Map.Entry<String, String> entry: map.entrySet()) {
                                     if(entry.getValue().contains(adapter.getItem(position))) {
                                         System.out.println("The key for value " + adapter.getItem(position) + " is " + entry.getKey());
                                         key = entry.getKey();
+                                        value = entry.getValue();
                                         break;
                                     }
                                 }
                                 intent.putExtra("message", key);
+                                intent.putExtra("name",value);
                                 startActivity(intent);
                             }
                         });

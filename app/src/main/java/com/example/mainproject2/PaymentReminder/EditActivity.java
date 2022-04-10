@@ -75,6 +75,7 @@ public class EditActivity extends AppCompatActivity {
         amount = findViewById(R.id.amount);
         radioGroup = findViewById(R.id.rdogroup);
 
+        getSupportActionBar().setTitle("Payment Reminder");
 
 
 

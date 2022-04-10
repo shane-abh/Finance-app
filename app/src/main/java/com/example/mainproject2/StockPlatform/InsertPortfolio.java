@@ -71,6 +71,7 @@ public class InsertPortfolio extends AppCompatActivity {
         back = findViewById(R.id.back);
 
         selectdate.setOnClickListener(mClick);
+        getSupportActionBar().setTitle("My Portfolio");
 
         firebaseDatabase = FirebaseDatabase.getInstance();
 

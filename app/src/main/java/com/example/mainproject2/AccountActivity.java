@@ -56,6 +56,8 @@ public class AccountActivity extends AppCompatActivity implements GoogleApiClien
         userId=(TextView)findViewById(R.id.userId);
         profileImage=(ImageView)findViewById(R.id.profileImage);
 
+        getSupportActionBar().setTitle("My Account");
+
         addbtn = findViewById(R.id.btn);
         btn2 = findViewById(R.id.btn2);
 

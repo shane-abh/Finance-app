@@ -6,11 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ExpenseManager.ExpenseCalculatorMain"
     android:id="@+id/my_drawer_layout"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="10dp">
 
             <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +25,7 @@
         android:layout_height="wrap_content"
         android:text="Summary"
         android:textColor="@color/black"
-        android:textSize="35dp"
+        android:textSize="30dp"
         android:layout_marginTop="50dp"/>
 
 
@@ -43,14 +45,18 @@
         android:layout_height="wrap_content"
         android:text="More Details>>>"
         android:id="@+id/Details"
-        android:textColor="#214283"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:textColor="@color/lightblue"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-black"
         android:textSize="20dp" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Balance Trend"
         android:textColor="@color/black"
-        android:textSize="35dp"
+        android:textSize="30dp"
         android:layout_marginTop="50dp"/>
         <WebView
         android:id="@+id/webview"

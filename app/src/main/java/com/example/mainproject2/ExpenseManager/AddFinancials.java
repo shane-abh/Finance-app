@@ -21,6 +21,7 @@ public class AddFinancials extends AppCompatActivity {
         tabLayout = findViewById(R.id.tablayout);
         viewPager = findViewById(R.id.viewPager);
 
+        getSupportActionBar().setTitle("Expense Manager");
 
 
         tabLayout.setupWithViewPager(viewPager);

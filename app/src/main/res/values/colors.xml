@@ -15,5 +15,19 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="profile">#FFA200</color>
+    <color name="profile">#1766FF</color>
+
+    <color name="darkblue">#2728FF</color>
+    <color name="lightblue">#289EFE</color>
+    <color name="green">#28FF28</color>`
+    <color name="orange">#FF8C25</color>
+    <color name="errorRed">#FF2323</color>
+
+    <color name="text">#FFFFFF</color>
+    <color name="fab">#289EFE</color>
+    <color name="buttons">#289EFE</color>
+
+
+
+
 </resources>

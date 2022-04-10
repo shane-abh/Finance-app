@@ -25,6 +25,8 @@ public class BalanceSheet extends AppCompatActivity {
         viewPager = findViewById(R.id.viewpager);
         viewPager.setPagingEnabled(false);
 
+        getSupportActionBar().setTitle("Balance Sheet");
+
         tabLayout.setupWithViewPager(viewPager);
 
         VPAdapter vpAdapter = new VPAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);

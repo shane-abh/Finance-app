@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".StockPlatform.InsertPortfolio"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/background"
+    android:padding="10dp">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -59,6 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Enter Buy Price"
+        android:paddingLeft="10dp"
         android:id="@+id/buyPrice"/>
 
     <TextView
@@ -72,7 +75,8 @@
         android:layout_height="50dp"
         android:inputType="number"
         android:hint="Enter Quantity"
-        android:id="@+id/qty"/>
+        android:id="@+id/qty"
+        android:paddingLeft="10dp"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -88,14 +92,16 @@
         android:hint="DD/MM/YYYY"
         android:id="@+id/edtdate"
         android:focusable="false"
-        android:ems="15">
+        android:ems="15"
+        android:paddingLeft="10dp">
     </EditText>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="Submit"
-        android:id="@+id/btn"/>
+        android:id="@+id/btn"
+        android:backgroundTint="@color/buttons"/>
 
 
 

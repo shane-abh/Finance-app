@@ -77,6 +77,8 @@ public class DashBoardActivity extends AppCompatActivity implements TasksFragmen
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        getSupportActionBar().setTitle("Payment Reminder");
+
         nav_view = findViewById(R.id.nav_view);
         Navigation_drawer();
 
