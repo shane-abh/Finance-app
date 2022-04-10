@@ -76,15 +76,19 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==RC_SIGN_IN){
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+        if(resultCode != RESULT_CANCELED){
 
-            AuthCredential credential = GoogleAuthProvider.getCredential(result.getSignInAccount().getIdToken(), null);
-            auth.signInWithCredential(credential);
+            if(requestCode==RC_SIGN_IN){
+                GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+
+                AuthCredential credential = GoogleAuthProvider.getCredential(result.getSignInAccount().getIdToken(), null);
+                auth.signInWithCredential(credential);
 //            Toast.makeText(getApplicationContext(),user.toString(),Toast.LENGTH_LONG).show();
-            handleSignInResult(result);
+                handleSignInResult(result);
 
+            }
         }
+
 
     }
     private void handleSignInResult(GoogleSignInResult result){

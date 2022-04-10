@@ -39,35 +39,35 @@
             android:text="id"
             android:layout_marginTop="20dp"/>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add"
-            android:backgroundTint="@color/teal_700"
-            android:id="@+id/btn"/>
+<!--        <Button-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Add"-->
+<!--            android:backgroundTint="@color/teal_700"-->
+<!--            android:id="@+id/btn"/>-->
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Go to Main Activity"
-            android:backgroundTint="@color/teal_700"
-            android:id="@+id/btn2"/>
+<!--        <Button-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Go to Main Activity"-->
+<!--            android:backgroundTint="@color/teal_700"-->
+<!--            android:id="@+id/btn2"/>-->
 
 
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Go to Expense Manager"
-            android:backgroundTint="@color/teal_700"
-            android:id="@+id/ExpenseManager"/>
+<!--        <Button-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Go to Expense Manager"-->
+<!--            android:backgroundTint="@color/teal_700"-->
+<!--            android:id="@+id/ExpenseManager"/>-->
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Go to Stock platform"
-            android:backgroundTint="@color/teal_700"
-            android:id="@+id/stock"/>
+<!--        <Button-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Go to Stock platform"-->
+<!--            android:backgroundTint="@color/teal_700"-->
+<!--            android:id="@+id/stock"/>-->
 
         <Button
             android:layout_width="wrap_content"

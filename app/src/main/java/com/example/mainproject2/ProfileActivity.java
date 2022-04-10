@@ -24,6 +24,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         getSupportActionBar().setTitle("Home");
+
 //        getSupportActionBar().setLogo(R.drawable.home);
 
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);

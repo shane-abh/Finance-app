@@ -30,7 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class AccountActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
-    Button logoutBtn,addbtn,btn2;
+    Button logoutBtn;
     TextView userName,userEmail,userId;
     ImageView profileImage;
     private GoogleApiClient googleApiClient;
@@ -40,9 +40,9 @@ public class AccountActivity extends AppCompatActivity implements GoogleApiClien
 
     DatabaseReference databaseReference;
 
-    Button addExp,ExpenseManagerbtn;
 
-    Button stock;
+
+
 
 
     @Override
@@ -58,13 +58,7 @@ public class AccountActivity extends AppCompatActivity implements GoogleApiClien
 
         getSupportActionBar().setTitle("My Account");
 
-        addbtn = findViewById(R.id.btn);
-        btn2 = findViewById(R.id.btn2);
 
-        stock = findViewById(R.id.stock);
-
-
-        ExpenseManagerbtn = findViewById(R.id.ExpenseManager);
 
         mAuth = FirebaseAuth.getInstance();
 

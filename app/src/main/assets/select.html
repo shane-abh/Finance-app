@@ -102,6 +102,23 @@ th{
 font-size:15px;
 }
 
+.instruction{
+  font-family : 'Avenir Black' ;
+  font-size : 15px;
+  margin-bottom:50px;
+}
+
+.set_buttons{
+  background-color: mediumseagreen;
+  padding-left:30px;
+  padding-right:30px;
+}
+.stop_buttons{
+  background-color: red;
+  padding-left:30px;
+  padding-right:30px
+}
+
 
 </style>
 
@@ -111,7 +128,7 @@ font-size:15px;
 </head>
 <body>
 
-<h1>Real-Time price Alert</h1>
+
 
 <div class="instruction">
     <h2>How to Use:</h2>
@@ -153,8 +170,8 @@ font-size:15px;
 
 
         <tr>
-            <td colspan="2" style="text-align:center"><button id="set" class="buttons">Set</button></td>
-            <td colspan="2" style="text-align:center"><button id="stop" class="buttons">Stop</button></td>
+            <td colspan="2" style="text-align:center"><button id="set" class="set_buttons">Set</button></td>
+            <td colspan="2" style="text-align:center"><button id="stop" class="stop_buttons">Stop</button></td>
         </tr>
 
         <tr>
@@ -171,8 +188,8 @@ font-size:15px;
 
 
         <tr>
-            <td  colspan="2" style="text-align:center"><button id="set2" class="buttons">Set</button></td>
-            <td  colspan="2" style="text-align:center"><button id="stop2" class="buttons">Stop</button></td>
+            <td  colspan="2" style="text-align:center"><button id="set2" class="set_buttons">Set</button></td>
+            <td  colspan="2" style="text-align:center"><button id="stop2" class="stop_buttons">Stop</button></td>
         </tr>
 
 
@@ -189,8 +206,8 @@ font-size:15px;
         </tr>
 
         <tr>
-            <td  colspan="2" style="text-align:center"><button id="set3" class="buttons">Set</button></td>
-            <td  colspan="2" style="text-align:center"><button id="stop3" class="buttons">Stop</button></td>
+            <td  colspan="2" style="text-align:center"><button id="set3" class="set_buttons">Set</button></td>
+            <td  colspan="2" style="text-align:center"><button id="stop3" class="stop_buttons">Stop</button></td>
         </tr>
 
 
@@ -208,14 +225,14 @@ font-size:15px;
         </tr>
 
         <tr>
-            <td  colspan="2" style="text-align:center"><button id="set4" class="buttons">Set</button></td>
-            <td  colspan="2" style="text-align:center"><button id="stop4" class="buttons">Stop</button></td>
+            <td  colspan="2" style="text-align:center"><button id="set4" class="set_buttons">Set</button></td>
+            <td  colspan="2" style="text-align:center"><button id="stop4" class="stop_buttons">Stop</button></td>
         </tr>
         </tbody>
     </table>
 </center>
 
-<button id="getval"></button>
+
 
 
 <script type="module">
@@ -247,11 +264,6 @@ font-size:15px;
       const db = getDatabase();
 
 
-      var getval = document.getElementById("getval");
-      getval.addEventListener('click',function() {
-
-                console.log(document.getElementById("myInput").value);
-              });
 
       var arr =[];
       var arr2 = [];
