@@ -140,7 +140,7 @@ public class ExpenseDetails extends AppCompatActivity {
 
         //remove the description label on the lower left corner, default true if not set
         pieChart.getDescription().setEnabled(true);
-        pieChart.getLegend().setTextColor(Color.WHITE);
+        pieChart.getLegend().setTextColor(Color.BLACK);
 
 //        pieChart.spin( 500,0,-360f, Easing.EaseInOutQuad);
         pieChart.setCenterText("Expenses");
@@ -160,6 +160,7 @@ public class ExpenseDetails extends AppCompatActivity {
         //setting the color of the hole in the middle, default white
         pieChart.setHoleColor(Color.parseColor("#000000"));
         pieChart.setHoleRadius(60);
+        pieChart.setBackgroundColor(Color.parseColor("#EDEDED"));
 
     }
 
@@ -232,12 +233,12 @@ public class ExpenseDetails extends AppCompatActivity {
                 String label = "type";
                 //initializing colors for the entries
                 ArrayList<Integer> colors = new ArrayList<>();
-                colors.add(Color.parseColor("#304567"));
-                colors.add(Color.parseColor("#309967"));
-                colors.add(Color.parseColor("#476567"));
-                colors.add(Color.parseColor("#890567"));
-                colors.add(Color.parseColor("#a35567"));
-                colors.add(Color.parseColor("#ff5f67"));
+                colors.add(Color.parseColor("#006FFF"));
+                colors.add(Color.parseColor("#13F4EF"));
+                colors.add(Color.parseColor("#68FF00"));
+                colors.add(Color.parseColor("#FAFF00"));
+                colors.add(Color.parseColor("#FFBF00"));
+                colors.add(Color.parseColor("#FF005C"));
                 colors.add(Color.parseColor("#3ca567"));
 
                 for(String type: typeAmountMap.keySet()){

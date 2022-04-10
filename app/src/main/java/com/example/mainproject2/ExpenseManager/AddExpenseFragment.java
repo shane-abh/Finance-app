@@ -2,6 +2,7 @@ package com.example.mainproject2.ExpenseManager;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.LayoutInflater;
@@ -152,6 +153,8 @@ public class AddExpenseFragment extends Fragment {
 
                                     if (task.isSuccessful()) {
                                         Toast.makeText((getContext()), "Data inserted", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getContext(),ExpenseDetails.class);
+                                        startActivity(intent);
                                     } else {
                                         Toast.makeText((getContext()), "Data not inserted", Toast.LENGTH_SHORT).show();
                                     }

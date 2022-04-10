@@ -128,7 +128,7 @@ public class ExpenseCalculatorMain extends AppCompatActivity {
 
         //remove the description label on the lower left corner, default true if not set
         pieChart.getDescription().setEnabled(true);
-        pieChart.getLegend().setTextColor(Color.WHITE);
+        pieChart.getLegend().setTextColor(Color.BLACK);
 
 //        pieChart.spin( 500,0,-360f, Easing.EaseInOutQuad);
 //        pieChart.setCenterText("");
@@ -149,7 +149,7 @@ public class ExpenseCalculatorMain extends AppCompatActivity {
         pieChart.setHoleColor(Color.parseColor("#000000"));
         pieChart.setHoleRadius(20);
         pieChart.setTransparentCircleRadius(55);
-        pieChart.setBackgroundColor(Color.parseColor("#3C3F41"));
+        pieChart.setBackgroundColor(Color.parseColor("#EDEDED"));
 
 
     }
@@ -213,13 +213,9 @@ public class ExpenseCalculatorMain extends AppCompatActivity {
                 String label = "";
                 //initializing colors for the entries
                 ArrayList<Integer> colors = new ArrayList<>();
-                colors.add(Color.parseColor("#304567"));
-                colors.add(Color.parseColor("#309967"));
-                colors.add(Color.parseColor("#476567"));
-                colors.add(Color.parseColor("#890567"));
-                colors.add(Color.parseColor("#a35567"));
-                colors.add(Color.parseColor("#ff5f67"));
-                colors.add(Color.parseColor("#3ca567"));
+                colors.add(Color.parseColor("#F7004C"));
+                colors.add(Color.parseColor("#25F700"));
+
 
                 for(String type: typeAmountMap.keySet()){
                     pieEntries.add(new PieEntry(typeAmountMap.get(type).floatValue(), type));

@@ -10,7 +10,7 @@ function init(date, bal){
         animationEnabled: true,
         theme: "light2",
         title:{
-            text: "Simple Line Chart"
+            text: ""
         },
         data: [{
                   		type: "line",
