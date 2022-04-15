@@ -6,7 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,12 +25,15 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener  {
 
@@ -36,6 +43,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     FirebaseAuth auth;
     private static final int RC_SIGN_IN = 1;
+    EditText name,email,password;
+    Button signin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +52,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         setContentView(R.layout.activity_login);
 
         getSupportActionBar().setTitle("Login");
+
+        signin = findViewById(R.id.button);
+        name = findViewById(R.id.name);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
 
 
         GoogleSignInOptions gso =  new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -65,8 +79,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
+        signin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validate();
+            }
+        });
+
 
     }
+
+
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
@@ -100,7 +123,42 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
     private void gotoProfile(){
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         Intent intent=new Intent(LoginActivity.this,ProfileActivity.class);
         startActivity(intent);
+    }
+
+    public void validate(){
+        String user_email = email.getText().toString();
+        String user_password = password.getText().toString();
+
+        if(!Patterns.EMAIL_ADDRESS.matcher(user_email).matches()){
+            email.setError("Invalid");
+            Toast.makeText(getApplicationContext(), "Email Invalid", Toast.LENGTH_SHORT).show();
+        } else if(TextUtils.isEmpty(user_password)){
+            password.setError("Enter Password");
+        } else if(user_password.length()<6){
+            password.setError("Password should be more than 6 characters");
+        } else {
+            firebaseSignIn(user_email,user_password);
+        }
+
+    }
+
+    public void firebaseSignIn(String email,String password){
+        auth.signInWithEmailAndPassword(email,password)
+                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        Toast.makeText(getApplicationContext(),"Registration Successful",Toast.LENGTH_LONG).show();
+                        Intent intent=new Intent(LoginActivity.this,ProfileActivity.class);
+                        startActivity(intent);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(),"Registration Not Successful. "+ e.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

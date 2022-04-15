@@ -161,7 +161,7 @@ function tech_analysis(str){
       var tech_analysis = new XMLHttpRequest();
       tech_analysis.open('GET', url, true);
       tech_analysis.setRequestHeader('accept', 'application/json');
-      tech_analysis.setRequestHeader('x-api-key', 'SCLhLZhDdK17GDErlpRhbn71KQugt6a868Z5LPB0');
+      tech_analysis.setRequestHeader('x-api-key', 'FMxCrHkI2Q6qgMv5jgMGJaid7RnMxhDP8H3VDd8Z');
       tech_analysis.onload = function(){
         var d = JSON.parse(this.response);
         console.log(d.finance.result.instrumentInfo.technicalEvents.provider);

@@ -15,6 +15,8 @@
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MainProject2/app/src/main/res/drawable/expense.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MainProject2/app/src/main/res/drawable/graph.xml" value="0.19144144144144143" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MainProject2/app/src/main/res/drawable/ic_alarm_black_24dp.xml" value="0.32666666666666666" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MainProject2/app/src/main/res/drawable/ic_delete_black_24dp.xml" value="0.18162393162393162" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MainProject2/app/src/main/res/drawable/ic_edit_black_24dp.xml" value="0.18162393162393162" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MainProject2/app/src/main/res/drawable/refresh.xml" value="0.19144144144144143" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MainProject2/app/src/main/res/drawable/splash_background.xml" value="0.19144144144144143" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MainProject2/app/src/main/res/layout/activity_account.xml" value="0.17747747747747747" />
@@ -31,6 +33,7 @@
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MainProject2/app/src/main/res/layout/activity_profile.xml" value="0.2" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MainProject2/app/src/main/res/layout/activity_real_time_price_alert.xml" value="0.17747747747747747" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MainProject2/app/src/main/res/layout/activity_search.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MainProject2/app/src/main/res/layout/activity_sign_up.xml" value="0.1683760683760684" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MainProject2/app/src/main/res/layout/activity_splash.xml" value="0.176" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MainProject2/app/src/main/res/layout/activity_stock_page.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MainProject2/app/src/main/res/layout/activity_trial.xml" value="0.17747747747747747" />
@@ -44,7 +47,7 @@
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MainProject2/app/src/main/res/layout/fragment_tasks.xml" value="0.17747747747747747" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MainProject2/app/src/main/res/layout/portfolio_info.xml" value="0.36231884057971014" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MainProject2/app/src/main/res/layout/record.xml" value="0.17747747747747747" />
-        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MainProject2/app/src/main/res/layout/transaction_row_layout.xml" value="0.17747747747747747" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MainProject2/app/src/main/res/layout/transaction_row_layout.xml" value="0.2" />
         <entry key="..\:/Users/Lenovo/AndroidStudioProjects/MainProject2/app/src/main/res/menu/nav_drawer.xml" value="0.17747747747747747" />
       </map>
     </option>

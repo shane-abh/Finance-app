@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MainProject2">
         <activity
+            android:name=".SignUpActivity"
+            android:exported="true" />
+        <activity
             android:name=".AccountActivity"
             android:exported="true" />
         <activity
@@ -35,7 +38,7 @@
             android:exported="true" />
         <activity
             android:name=".ExpenseManager.PersonalBalanceStatement"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".StockPlatform.InsertPortfolio"
             android:exported="true" />
@@ -53,7 +56,7 @@
             android:exported="true" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".StockPlatform.Search"
             android:exported="true" />

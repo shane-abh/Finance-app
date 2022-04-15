@@ -121,9 +121,9 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_delete_black_24dp"
             android:layout_alignParentRight="true"
-            android:onClick="onDeleteClick"/>
+            android:onClick="onDeleteClick"
+            android:src="@drawable/ic_delete_black_24dp" />
 
     </RelativeLayout>
 

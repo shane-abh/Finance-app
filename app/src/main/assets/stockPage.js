@@ -57,7 +57,7 @@ function chart(str){
 
       yfinance.open('GET', url, true);
       yfinance.setRequestHeader('accept', 'application/json');
-      yfinance.setRequestHeader('x-api-key', 'SCLhLZhDdK17GDErlpRhbn71KQugt6a868Z5LPB0');
+      yfinance.setRequestHeader('x-api-key', 'FMxCrHkI2Q6qgMv5jgMGJaid7RnMxhDP8H3VDd8Z');
 
 
       yfinance.onload = function () {
@@ -125,7 +125,7 @@ function graph(cal,url){
 
       yfinance.open('GET', url, true);
       yfinance.setRequestHeader('accept', 'application/json');
-      yfinance.setRequestHeader('x-api-key', 'SCLhLZhDdK17GDErlpRhbn71KQugt6a868Z5LPB0');
+      yfinance.setRequestHeader('x-api-key', 'FMxCrHkI2Q6qgMv5jgMGJaid7RnMxhDP8H3VDd8Z');
 
 
       yfinance.onload = function () {
@@ -183,7 +183,7 @@ function stock_summary(str){
   var summary = new XMLHttpRequest();
   summary.open('GET', url, true);
   summary.setRequestHeader('accept', 'application/json');
-  summary.setRequestHeader('x-api-key', 'SCLhLZhDdK17GDErlpRhbn71KQugt6a868Z5LPB0');
+  summary.setRequestHeader('x-api-key', 'FMxCrHkI2Q6qgMv5jgMGJaid7RnMxhDP8H3VDd8Z');
   summary.onload = function(){
     var d = JSON.parse(this.response);
     // console.log(d.quoteResponse.result[0]);
@@ -260,7 +260,7 @@ function financial_analysis(str){
   var fin = new XMLHttpRequest();
   fin.open('GET', url, true);
   fin.setRequestHeader('accept', 'application/json');
-  fin.setRequestHeader('x-api-key', 'SCLhLZhDdK17GDErlpRhbn71KQugt6a868Z5LPB0');
+  fin.setRequestHeader('x-api-key', 'FMxCrHkI2Q6qgMv5jgMGJaid7RnMxhDP8H3VDd8Z');
   fin.onload = function(){
     var d = JSON.parse(this.response);
 
@@ -322,7 +322,7 @@ function tech_analysis(str){
       var tech_analysis = new XMLHttpRequest();
       tech_analysis.open('GET', url, true);
       tech_analysis.setRequestHeader('accept', 'application/json');
-      tech_analysis.setRequestHeader('x-api-key', 'SCLhLZhDdK17GDErlpRhbn71KQugt6a868Z5LPB0');
+      tech_analysis.setRequestHeader('x-api-key', 'FMxCrHkI2Q6qgMv5jgMGJaid7RnMxhDP8H3VDd8Z');
       tech_analysis.onload = function(){
         var d = JSON.parse(this.response);
         console.log(d.finance.result.instrumentInfo.technicalEvents.provider);

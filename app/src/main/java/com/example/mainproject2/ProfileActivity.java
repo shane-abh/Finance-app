@@ -6,6 +6,7 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.example.mainproject2.ExpenseManager.ExpenseCalculatorMain;
 import com.example.mainproject2.ExpenseManager.TrialActivity;
@@ -17,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class ProfileActivity extends AppCompatActivity {
 
     CardView expenseCalculator, investmentPlatform, realTimeAlert, paymentReminders,account;
+    Button trial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +27,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Home");
 
-//        getSupportActionBar().setLogo(R.drawable.home);
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
+
 
         expenseCalculator = findViewById(R.id.expenseCalculator);
         investmentPlatform = findViewById(R.id.investmentPlatform);
@@ -75,6 +77,15 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+
+        trial = findViewById(R.id.trial);
+        trial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TrialActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 

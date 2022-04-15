@@ -132,7 +132,7 @@ public class ExpenseDetails extends AppCompatActivity {
 //        etAmount = findViewById(R.id.etAmount);
 //        etMessage = findViewById(R.id.etMessage);
 //        ivSend = findViewById(R.id.ivSend);
-        tvEmpty = findViewById(R.id.tvEmpty);
+//        tvEmpty = findViewById(R.id.tvEmpty);
     }
     private void initPieChart(){
         //using percentage as values instead of amount

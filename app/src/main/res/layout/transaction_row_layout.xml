@@ -4,9 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardBackgroundColor="#000000"
+    android:layout_height="wrap_content"    
     app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="#E1DEDE"
     app:cardCornerRadius="10dp">
 
     <LinearLayout
@@ -15,7 +15,7 @@
         android:background="@color/white"
         android:orientation="horizontal"
         android:padding="5dp"
-        android:backgroundTint="@color/black"
+        android:backgroundTint="#E1DEDE"
         android:layout_marginLeft="10dp">
 
         <LinearLayout
@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Amount"
-                android:textColor="@color/teal_700"
+                android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -43,14 +43,14 @@
                     android:layout_width="200dp"
                     android:layout_height="20dp"
                     android:text="Message"
-                    android:textColor="@color/teal_700" />
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/tvCategoty"
                     android:layout_width="150dp"
                     android:layout_height="20dp"
                     android:text="Category"
-                    android:textColor="@color/teal_700"/>
+                    android:textColor="@color/black"/>
             </LinearLayout>
 
             <TextView
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Date"
-                android:textColor="@color/teal_700"
+                android:textColor="@color/black"
                 android:layout_marginTop="5dp" />
 
 
@@ -73,7 +73,7 @@
             android:clickable="true"
             app:srcCompat="@drawable/garbage"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
-            android:background="@color/white"
+            
             />
     </LinearLayout>
 
