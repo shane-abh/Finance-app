@@ -18,7 +18,7 @@ function init(date, bal){
                       dataPoints: dps
                   	}]
     });
-    for(let i=0;i<date.length;i++){
+    for(let i=0;i<=date.length;i++){
          dps.push({x:new Date(date[i]),y:parseFloat(bal[i])});
     }
     chart.render();

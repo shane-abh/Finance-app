@@ -140,9 +140,9 @@ public class StockPage extends AppCompatActivity {
                         startActivity(intent6);
                         return true;
 
-                    case R.id.nav_logout:
-//                        Intent intent7 = new Intent(getApplicationContext(), AccountActivity.class);
-//                        startActivity(intent7);
+                    case R.id.nav_account:
+                        Intent intent7 = new Intent(getApplicationContext(), AccountActivity.class);
+                        startActivity(intent7);
                         return true;
 
 

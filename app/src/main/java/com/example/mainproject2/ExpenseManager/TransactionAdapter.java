@@ -80,7 +80,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                                 transactionList.remove(holder.getAdapterPosition());
                                 FirebaseAdapter fb = new FirebaseAdapter();
                                 fb.remove(a.getKey()).addOnCompleteListener(task -> {
-                                    System.out.println("hello3");
+
                                     if (task.isSuccessful()) {
                                         Toast.makeText(ctx, "Data deleted", Toast.LENGTH_SHORT).show();
                                         notifyItemRemoved(holder.getAdapterPosition());

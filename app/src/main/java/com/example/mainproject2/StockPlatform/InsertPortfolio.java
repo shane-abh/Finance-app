@@ -77,7 +77,7 @@ public class InsertPortfolio extends AppCompatActivity {
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
-        databaseReference = firebaseDatabase.getReference().child("Users").child(user.getUid()).child(user.getDisplayName()).child("My Portfolio");
+        databaseReference = firebaseDatabase.getReference().child("Users").child(user.getUid()).child("My Portfolio");
 
 
         databaseReferenceSearch = FirebaseDatabase.getInstance().getReference().child("Search");
@@ -112,6 +112,7 @@ public class InsertPortfolio extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 userStocks u = new userStocks();
+                MyPortfolioFirebaseAdapter fb = new MyPortfolioFirebaseAdapter();
                 u.setSymbol(Symbol.getText().toString());
 
                 u.setStName(stName.getText().toString());
@@ -119,7 +120,7 @@ public class InsertPortfolio extends AppCompatActivity {
                 u.setDate(selectdate.getText().toString());
 
                 if(user!=null){
-                    databaseReference.push().setValue(u).addOnCompleteListener(task ->
+                    fb.add(u).addOnCompleteListener(task ->
                     {
                         System.out.println("Inside database pushing");
                         if(task.isSuccessful()){

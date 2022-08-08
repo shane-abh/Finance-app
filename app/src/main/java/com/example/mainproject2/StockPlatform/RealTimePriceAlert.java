@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.mainproject2.AccountActivity;
 import com.example.mainproject2.ExpenseManager.ExpenseCalculatorMain;
 import com.example.mainproject2.PaymentReminder.DashBoardActivity;
 import com.example.mainproject2.ProfileActivity;
@@ -143,6 +144,11 @@ public class RealTimePriceAlert extends AppCompatActivity {
                     case R.id.nav_reminder:
                         Intent intent6 = new Intent(getApplicationContext(), DashBoardActivity.class);
                         startActivity(intent6);
+                        return true;
+
+                    case R.id.nav_account:
+                        Intent intent7 = new Intent(getApplicationContext(), AccountActivity.class);
+                        startActivity(intent7);
                         return true;
 
 

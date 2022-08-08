@@ -8,6 +8,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.mainproject2.R;
 
@@ -20,6 +21,9 @@ public class AnnualIncomeStatementFrag extends Fragment {
         // Required empty public constructor
     }
 
+    WebView webView;
+    SwipeRefreshLayout refreshLayout;
+
    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,8 +31,23 @@ public class AnnualIncomeStatementFrag extends Fragment {
        
         View view = inflater.inflate(R.layout.fragment_annual, container, false);
 
-        WebView webView = view.findViewById(R.id.webview);
+        webView = view.findViewById(R.id.webview);
+        refreshLayout = view.findViewById(R.id.refresh);
 
+        loadData();
+
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadData();
+                refreshLayout.setRefreshing(false);
+            }
+        });
+        return view;
+    }
+
+    public void loadData(){
         webView.loadUrl("file:///android_asset/annualIncomeStatement.html");
 
         webView.getSettings().setJavaScriptEnabled(true);
@@ -50,7 +69,5 @@ public class AnnualIncomeStatementFrag extends Fragment {
                 view.loadUrl("javascript:init('"+symbol.toString()+"')");
             }
         });
-        
-        return view;
     }
 }

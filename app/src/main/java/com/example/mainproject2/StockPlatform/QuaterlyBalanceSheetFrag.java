@@ -8,6 +8,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.mainproject2.R;
 
@@ -20,6 +21,8 @@ public class QuaterlyBalanceSheetFrag extends Fragment {
         // Required empty public constructor
     }
 
+    WebView webView;
+    SwipeRefreshLayout refreshLayout;
 
 
     @Override
@@ -28,7 +31,29 @@ public class QuaterlyBalanceSheetFrag extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_quaterly, container, false);
 
-        WebView webView = view.findViewById(R.id.webview);
+        webView = view.findViewById(R.id.webview);
+        refreshLayout = view.findViewById(R.id.refresh);
+
+
+
+
+        loadData();
+
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadData();
+                refreshLayout.setRefreshing(false);
+            }
+        });
+
+
+
+        return view;
+    }
+
+    public void loadData(){
 
         webView.loadUrl("file:///android_asset/quaterlyBalanceSheet.html");
 
@@ -53,6 +78,5 @@ public class QuaterlyBalanceSheetFrag extends Fragment {
             }
         });
 
-        return view;
     }
 }

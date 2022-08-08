@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity"
+    tools:context=".LoginActivity"
     android:orientation="vertical"
     android:background="@drawable/background">
 
@@ -23,14 +23,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:orientation="vertical">
 
         <ImageView
             android:layout_width="189dp"
             android:layout_height="121dp"
             android:src="@drawable/stock_exchange_app"
-            android:layout_marginBottom="50dp"/>
+            android:layout_marginBottom="30dp"/>
 
 
 
@@ -70,6 +70,34 @@
             android:backgroundTint="@color/buttons"
             android:fontFamily="sans-serif-medium"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password?"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/buttons"
+            android:fontFamily="sans-serif-black"
+            android:id="@+id/forgotPassword"
+            android:layout_marginBottom="20dp"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:background="#0D5CF8"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New User? Sign Up"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/buttons"
+            android:fontFamily="sans-serif-black"
+            android:id="@+id/signup"/>
+
         <com.google.android.gms.common.SignInButton
             android:id="@+id/sign_in_button"
             android:layout_width="match_parent"
@@ -80,6 +108,8 @@
             android:layout_marginLeft="20dp">
 
         </com.google.android.gms.common.SignInButton>
+
+
 
     </LinearLayout>
 

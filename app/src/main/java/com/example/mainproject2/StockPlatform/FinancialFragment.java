@@ -22,7 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 public class FinancialFragment extends Fragment {
-    TextView sym;
+
 
     CardView balanceSheetcard;
     CardView incomeStatementcard;
@@ -66,52 +66,12 @@ public class FinancialFragment extends Fragment {
 
 
 
-        sym = view.findViewById(R.id.symbol);
+
 
         fab = view.findViewById(R.id.fab);
 
 
         String str = getArguments().getString("message");
-        sym.setText(str);
-
-        arrow1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                // If the CardView is already expanded, set its visibility
-                //  to gone and change the expand less icon to expand more.
-                if (hidden1.getVisibility() == View.VISIBLE) {
-
-                    // The transition of the hiddenView is carried out
-                    //  by the TransitionManager class.
-                    // Here we use an object of the AutoTransition
-                    // Class to create a default transition.
-                    TransitionManager.beginDelayedTransition(balanceSheetcard,
-                            new AutoTransition());
-                    hidden1.setVisibility(View.GONE);
-                    arrow1.setImageResource(R.drawable.ic_baseline_expand_more_24);
-                }
-
-                // If the CardView is not expanded, set its visibility
-                // to visible and change the expand more icon to expand less.
-                else {
-
-                    TransitionManager.beginDelayedTransition(balanceSheetcard,
-                            new AutoTransition());
-                    hidden1.setVisibility(View.VISIBLE);
-                    arrow1.setImageResource(R.drawable.ic_baseline_expand_less_24);
-                }
-            }
-        });
-
-        balanceSheetcard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), BalanceSheet.class);
-                intent.putExtra("message", str.toString());
-                startActivity(intent);
-            }
-        });
 
 
         arrow1.setOnClickListener(new View.OnClickListener() {
@@ -154,6 +114,46 @@ public class FinancialFragment extends Fragment {
 //        });
 
 
+        arrow1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // If the CardView is already expanded, set its visibility
+                //  to gone and change the expand less icon to expand more.
+                if (hidden1.getVisibility() == View.VISIBLE) {
+
+                    // The transition of the hiddenView is carried out
+                    //  by the TransitionManager class.
+                    // Here we use an object of the AutoTransition
+                    // Class to create a default transition.
+                    TransitionManager.beginDelayedTransition(balanceSheetcard,
+                            new AutoTransition());
+                    hidden1.setVisibility(View.GONE);
+                    arrow1.setImageResource(R.drawable.ic_baseline_expand_more_24);
+                }
+
+                // If the CardView is not expanded, set its visibility
+                // to visible and change the expand more icon to expand less.
+                else {
+
+                    TransitionManager.beginDelayedTransition(balanceSheetcard,
+                            new AutoTransition());
+                    hidden1.setVisibility(View.VISIBLE);
+                    arrow1.setImageResource(R.drawable.ic_baseline_expand_less_24);
+                }
+            }
+        });
+
+        balanceSheetcard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), BalanceSheet.class);
+                intent.putExtra("message", str.toString());
+                startActivity(intent);
+            }
+        });
+
+
 
 
 
@@ -183,14 +183,14 @@ public class FinancialFragment extends Fragment {
             }
         });
 
-//        incomeStatementcard.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getContext(), IncomeStatement.class);
-//                intent.putExtra("message", str.toString());
-//                startActivity(intent);
-//            }
-//        });
+        incomeStatementcard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), IncomeStatement.class);
+                intent.putExtra("message", str.toString());
+                startActivity(intent);
+            }
+        });
 
 
 
@@ -219,14 +219,14 @@ public class FinancialFragment extends Fragment {
             }
         });
 
-//        cashflowcard.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getContext(), CashFlowStatement.class);
-//                intent.putExtra("message", str.toString());
-//                startActivity(intent);
-//            }
-//        });
+        cashflowcard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CashFlowStatement.class);
+                intent.putExtra("message", str.toString());
+                startActivity(intent);
+            }
+        });
 //
 //
 //

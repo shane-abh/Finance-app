@@ -10,6 +10,9 @@
     android:padding="8dp"
     >
 
+
+
+
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,27 +21,29 @@
         android:layout_marginBottom="10dp"
         android:backgroundTint="@color/lightblue"
         android:padding="10dp">
+
         <LinearLayout
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp">
+            android:orientation="vertical"
+            android:paddingLeft="10dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Balance"
                 android:textColor="@color/text"
-                android:textSize="20dp"
-                />
+                android:textSize="20dp" />
+
             <TextView
+                android:id="@+id/tvBalance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
                 android:text="0.00"
                 android:textColor="@color/text"
-                android:id="@+id/tvBalance"/>
+                android:textSize="15dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -48,14 +53,15 @@
         android:layout_gravity="right"
         android:layout_marginTop="50dp"
         android:layout_marginRight="10dp">
+
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/pbs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Balance Sheet"
-            android:textColor="@color/text"
-            android:padding="10dp"
             android:background="@color/lightblue"
-            android:id="@+id/pbs"/>
+            android:padding="10dp"
+            android:text="Balance Sheet"
+            android:textColor="@color/text" />
     </LinearLayout>
 
 
@@ -64,7 +70,7 @@
         android:id="@+id/pieChart_view"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginTop="100dp" />
+        android:layout_marginTop="110dp" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -101,6 +107,24 @@
         android:id="@+id/fab"
         app:fabSize="mini"
         android:src="@drawable/add"/>
+
+    <ImageView
+        android:id="@+id/wmptyviewIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/empty_folder"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text= "Add a record to generate view"
+        android:textSize="20dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="150dp"
+        android:visibility="invisible"
+        android:id="@+id/wmptyviewText"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

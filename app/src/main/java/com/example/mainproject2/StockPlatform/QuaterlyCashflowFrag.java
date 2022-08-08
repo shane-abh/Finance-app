@@ -8,6 +8,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.mainproject2.R;
 
@@ -19,13 +20,37 @@ public class QuaterlyCashflowFrag extends Fragment {
         // Required empty public constructor
     }
 
+    WebView webView;
+    SwipeRefreshLayout refreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_quaterly, container, false);
 
-        WebView webView = view.findViewById(R.id.webview);
+        webView = view.findViewById(R.id.webview);
+        refreshLayout = view.findViewById(R.id.refresh);
+
+
+
+
+        loadData();
+
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadData();
+                refreshLayout.setRefreshing(false);
+            }
+        });
+
+
+
+        return view;
+    }
+
+    public void loadData(){
 
         webView.loadUrl("file:///android_asset/quaterlyCashFlowStatement.html");
 
@@ -50,6 +75,5 @@ public class QuaterlyCashflowFrag extends Fragment {
             }
         });
 
-        return view;
     }
 }

@@ -1,10 +1,18 @@
 package com.example.mainproject2.StockPlatform;
 
+import com.google.firebase.database.Exclude;
+
 public class userStocks {
+    @Exclude
+    String key;
+
     String symbol,stName,qty;
     String price;
     String Date;
 
+    public userStocks() {
+
+    }
 
     public String getQty() {
         return qty;
@@ -30,7 +38,13 @@ public class userStocks {
         this.stName = stName;
     }
 
+    public String getKey() {
+        return key;
+    }
 
+    public void setKey(String key) {
+        this.key = key;
+    }
 
     public String getDate() {
         return Date;

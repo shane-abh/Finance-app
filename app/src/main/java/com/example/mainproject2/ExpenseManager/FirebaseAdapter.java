@@ -16,7 +16,7 @@ public class FirebaseAdapter {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
-        databaseReference = db.getReference().child("Users").child(user.getUid()).child(user.getDisplayName()).child("Expense Management");
+        databaseReference = db.getReference().child("Users").child(user.getUid()).child("Expense Management");
     }
 
 

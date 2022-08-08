@@ -46,6 +46,12 @@
             android:name=".StockPlatform.BalanceSheet"
             android:exported="true" />
         <activity
+            android:name=".StockPlatform.IncomeStatement"
+            android:exported="true" />
+        <activity
+            android:name=".StockPlatform.CashFlowStatement"
+            android:exported="true" />
+        <activity
             android:name=".StockPlatform.MyPortfolioActivity"
             android:exported="true" />
         <activity

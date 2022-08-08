@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.anychart.AnyChartView;
+import com.example.mainproject2.ProfileActivity;
 import com.example.mainproject2.R;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
@@ -34,12 +36,12 @@ public class ExpenseDetails extends AppCompatActivity {
 
     public static TextView tvEmpty;
     EditText etAmount, etMessage;
-    //    ImageView ivSend;
+    ImageView emptyView;
     boolean positive = true;
     RecyclerView rvTransactions;
     TransactionAdapter adapter;
     ArrayList<FinancialsClass> transactionList;
-    TextView tvBalance;
+    TextView tvBalance,emptyTV;
 
     FirebaseAdapter fb;
     String key = null;
@@ -64,9 +66,11 @@ public class ExpenseDetails extends AppCompatActivity {
 
         fb = new FirebaseAdapter();
 
-        checkIfEmpty(transactionList.size());
         pieChart = findViewById(R.id.pieChart_view);
         initPieChart();
+        emptyTV = findViewById(R.id.wmptyviewText);
+        emptyView = findViewById(R.id.wmptyviewIcon);
+
 
         pbs = findViewById(R.id.pbs);
 
@@ -83,6 +87,7 @@ public class ExpenseDetails extends AppCompatActivity {
         fab = findViewById(R.id.fab);
         tvBalance = findViewById(R.id.tvBalance);
 
+        checkIfEmpty(transactionList.size());
         loadfbData();
 
         pbs.setOnClickListener(new View.OnClickListener() {
@@ -123,16 +128,25 @@ public class ExpenseDetails extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        if(transactionList.size() == 0){
+            Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+            startActivity(intent);
+        }else{
+            Intent intent = new Intent(getApplicationContext(), ExpenseCalculatorMain.class);
+            startActivity(intent);
+        }
+
+    }
+
 
     // Initializing Views
     private void initViews() {
         transactionList = new ArrayList<FinancialsClass>();
-//        tvSign = findViewById(R.id.tvSign);
+
         rvTransactions = findViewById(R.id.rvTransactions);
-//        etAmount = findViewById(R.id.etAmount);
-//        etMessage = findViewById(R.id.etMessage);
-//        ivSend = findViewById(R.id.ivSend);
-//        tvEmpty = findViewById(R.id.tvEmpty);
+
     }
     private void initPieChart(){
         //using percentage as values instead of amount
@@ -164,13 +178,21 @@ public class ExpenseDetails extends AppCompatActivity {
 
     }
 
-    public static void checkIfEmpty(int size) {
+    public void checkIfEmpty(int size) {
         if (size == 0)
         {
-            tvEmpty.setVisibility(View.VISIBLE);
+//            tvEmpty.setVisibility(View.VISIBLE);
+            System.out.println("List is empty");
+            pieChart.setVisibility(View.INVISIBLE);
+            emptyTV.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.VISIBLE);
         }
         else {
-            tvEmpty.setVisibility(View.GONE);
+//            tvEmpty.setVisibility(View.GONE);
+            System.out.println("List is not empty");
+            pieChart.setVisibility(View.VISIBLE);
+            emptyTV.setVisibility(View.INVISIBLE);
+            emptyView.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -214,7 +236,6 @@ public class ExpenseDetails extends AppCompatActivity {
                 ArrayList<PieEntry> pieEntries = new ArrayList<>();
                 Map<String, Double> typeAmountMap = new HashMap<>();
 
-
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
 
                     FinancialsClass t = dataSnapshot.getValue(FinancialsClass.class);
@@ -225,8 +246,9 @@ public class ExpenseDetails extends AppCompatActivity {
                         typeAmountMap.put(t.getCategory(), Double.parseDouble(String.valueOf(t.getAmount())));
                         System.out.println(t.getCategory());
                     }
-
                 }
+
+                checkIfEmpty(transactionList.size());
                 setBalance(transactionList);
 
 

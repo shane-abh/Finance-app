@@ -8,6 +8,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.mainproject2.R;
 
@@ -21,7 +22,8 @@ public class AnnualBalanceSheetFrag extends Fragment {
         // Required empty public constructor
     }
 
-
+    WebView webView;
+    SwipeRefreshLayout refreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,8 +31,26 @@ public class AnnualBalanceSheetFrag extends Fragment {
         View view = inflater.inflate(R.layout.fragment_annual, container, false);
 
 
-        WebView webView = view.findViewById(R.id.webview);
+        webView = view.findViewById(R.id.webview);
+        refreshLayout = view.findViewById(R.id.refresh);
 
+
+
+
+        loadData();
+
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadData();
+                refreshLayout.setRefreshing(false);
+            }
+        });
+        return view;
+    }
+
+    public  void loadData(){
         webView.loadUrl("file:///android_asset/balanceSheet.html");
 
         webView.getSettings().setJavaScriptEnabled(true);
@@ -44,7 +64,6 @@ public class AnnualBalanceSheetFrag extends Fragment {
         webView.getSettings().setAllowFileAccessFromFileURLs(true);
         webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
         webView.getSettings().setDomStorageEnabled(true);
-
         String symbol = getArguments().getString("symbol");
         webView.setWebViewClient(new WebViewClient() {
 
@@ -53,11 +72,5 @@ public class AnnualBalanceSheetFrag extends Fragment {
             }
         });
 
-
-
-
-
-
-        return view;
     }
 }

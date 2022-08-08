@@ -3,6 +3,7 @@ package com.example.mainproject2;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -71,13 +72,16 @@ public class SignUpActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(getApplicationContext(),"Login Successful",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Registration Successful",Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                        startActivity(intent);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(),"Login Failed. "+ e.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Registration Failed. "+ e.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 }

@@ -51,6 +51,9 @@ public class Search extends AppCompatActivity {
 
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         databaseReferenceSearch = FirebaseDatabase.getInstance().getReference().child("Search");
+        databaseReferenceSearch.keepSynced(true);
+        getSupportActionBar().setTitle("Search");
+
         listView = findViewById(R.id.listView);
         listView.setClickable(true);
 
@@ -108,32 +111,23 @@ public class Search extends AppCompatActivity {
                 searchView.setQueryHint("Search");
 
                 searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
                     @Override
                     public boolean onQueryTextSubmit(String query)
                     {
-                        // If the list contains the search query
-                        // than filter the adapter
-                        // using the filter method
-                        // with the query as its argument
+                        // If the list contains the search query than filter the adapter
+                        // using the filter method with the query as its argument
                         if (mylist.contains(query)) {
                             adapter.getFilter().filter(query);
-
-
-
                         }
                         else {
                             // Search query not found in List View
-                            Toast
-                                    .makeText(getApplicationContext(),"Not found",Toast.LENGTH_LONG)
-                                    .show();
+                            Toast.makeText(getApplicationContext(),"Not found",Toast.LENGTH_LONG).show();
                         }
-//                        listView.setVisibility(View.GONE);
+//
                         return false;
                     }
 
-                    // This method is overridden to filter
-                    // the adapter according to a search query
+                    // This method is overridden to filter the adapter according to a search query
                     // when the user is typing search
                     @Override
                     public boolean onQueryTextChange(String newText)

@@ -543,16 +543,16 @@ font-size:15px;
 
         yfinance.open('GET', url, true);
         yfinance.setRequestHeader('accept', 'application/json');
-        yfinance.setRequestHeader('x-api-key', 'Lu5ZHazc6d2jopuGKqhnD6wUXU7Kbhxg4nS3AXi7');
+        yfinance.setRequestHeader('x-api-key', 'YQezE6zbgi89PZOCtC7qC4vaZch0niYA1N1GmlRM');
 
 
         yfinance.onload = function () {
             var  d = JSON.parse(this.response);
 
-            // console.log(d);
             var curPrice = d.quoteResponse.result[0].regularMarketPrice;
             document.getElementById(currentPrice).innerHTML = curPrice ;
 
+            //Checking if price has gone above the upper entered by the user
             if(parseFloat(curPrice)>price && price>0){
               console.log('high');
               console.log(curPrice);
@@ -564,8 +564,8 @@ font-size:15px;
               document.getElementById(currentPrice).style.fontSize = "small";
             }
 
-
-            if(parseFloat(curPrice)<stoploss){
+            //Checking if price has gone down below the stoploss entered by the user
+            if(parseFloat(curPrice)<stoploss && price>0){
               console.log('Lower Limit Reached');
               console.log(curPrice);
               document.getElementById(currentPrice).style.color = "red";

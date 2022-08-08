@@ -9,67 +9,92 @@
     android:orientation="vertical"
     >
 
+
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp">
 
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
             <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Summary"
-        android:textColor="@color/black"
-        android:textSize="30dp"
-        android:layout_marginTop="50dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:text="Summary"
+                    android:textColor="@color/black"
+                    android:textSize="30dp"
+                    android:id="@+id/summarytv"/>
 
 
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/pieChart_view"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="20dp" />
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/pieChart_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="20dp" />
+
+
+                <TextView
+                    android:id="@+id/Details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="More Details>>>"
+                    android:textColor="@color/lightblue"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:text="Balance Trend"
+                    android:textColor="@color/black"
+                    android:textSize="30dp"
+                    android:id="@+id/balancetv"/>
+
+                <WebView
+                    android:id="@+id/webview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sample"
+                    android:visibility="invisible" />
+            </LinearLayout>
 
 
 
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_anchor="@+id/linearLayout"
+                app:layout_anchorGravity="center"
+                android:id="@+id/progressbar"/>
 
 
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="More Details>>>"
-        android:id="@+id/Details"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:textColor="@color/lightblue"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-black"
-        android:textSize="20dp" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Balance Trend"
-        android:textColor="@color/black"
-        android:textSize="30dp"
-        android:layout_marginTop="50dp"/>
-        <WebView
-        android:id="@+id/webview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp" />
-        <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sample"
-        android:visibility="invisible"/>
-    </LinearLayout>
     </ScrollView>
+
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
@@ -77,5 +102,7 @@
         android:layout_gravity="start"
         app:menu="@menu/nav_drawer"
         android:id="@+id/nav_view"/>
+
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

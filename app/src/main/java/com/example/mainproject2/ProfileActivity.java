@@ -7,18 +7,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.mainproject2.ExpenseManager.ExpenseCalculatorMain;
 import com.example.mainproject2.ExpenseManager.TrialActivity;
 import com.example.mainproject2.PaymentReminder.DashBoardActivity;
 import com.example.mainproject2.StockPlatform.RealTimePriceAlert;
 import com.example.mainproject2.StockPlatform.Search;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfileActivity extends AppCompatActivity {
 
     CardView expenseCalculator, investmentPlatform, realTimeAlert, paymentReminders,account;
-    Button trial;
+
+    FirebaseAuth auth;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +32,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Home");
 
-
+        auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
 
 
 
@@ -73,16 +79,6 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-        trial = findViewById(R.id.trial);
-        trial.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TrialActivity.class);
                 startActivity(intent);
             }
         });

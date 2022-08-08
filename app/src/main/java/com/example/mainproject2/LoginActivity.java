@@ -39,9 +39,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     SignInButton signInButton;
     private GoogleApiClient googleApiClient;
-    TextView textView;
+    TextView textView,signup,forgotpassword;
 
     FirebaseAuth auth;
+    FirebaseUser user;
     private static final int RC_SIGN_IN = 1;
     EditText name,email,password;
     Button signin;
@@ -51,12 +52,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        getSupportActionBar().setTitle("Login");
+        getSupportActionBar().hide();
 
         signin = findViewById(R.id.button);
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
+        signup = findViewById(R.id.signup);
+        forgotpassword = findViewById(R.id.forgotPassword);
 
 
         GoogleSignInOptions gso =  new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -85,6 +88,27 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 validate();
             }
         });
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        forgotpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validateEmail();
+            }
+        });
+
+        user = auth.getCurrentUser();
+
+        if(user!= null){
+            gotoProfile();
+        }
 
 
     }
@@ -116,7 +140,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
     private void handleSignInResult(GoogleSignInResult result){
         if(result.isSuccess()){
-
             gotoProfile();
         }else{
             Toast.makeText(getApplicationContext(),"Sign in cancel",Toast.LENGTH_LONG).show();
@@ -142,7 +165,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         } else {
             firebaseSignIn(user_email,user_password);
         }
-
     }
 
     public void firebaseSignIn(String email,String password){
@@ -150,15 +172,31 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(getApplicationContext(),"Registration Successful",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Login Successful",Toast.LENGTH_LONG).show();
                         Intent intent=new Intent(LoginActivity.this,ProfileActivity.class);
                         startActivity(intent);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(),"Registration Not Successful. "+ e.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Login Not Successful. "+ e.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
+
+    }
+
+    public void validateEmail(){
+        String user_email = email.getText().toString();
+        if(!Patterns.EMAIL_ADDRESS.matcher(user_email).matches()){
+            email.setError("Invalid");
+            Toast.makeText(getApplicationContext(), "Email Invalid", Toast.LENGTH_SHORT).show();
+        }else{
+            auth.sendPasswordResetEmail(user_email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(getApplicationContext(), "Password reset email sent.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 }

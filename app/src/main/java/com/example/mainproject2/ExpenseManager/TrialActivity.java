@@ -112,7 +112,7 @@ public class TrialActivity extends AppCompatActivity {
 //                        runOnUiThread(new Runnable() {
 //                            @Override
 //                            public void run() {
-//                                webView.loadUrl("file:///android_asset/trial.html");
+//                                webView.loadUrl("file:///android_asset/BalanceTrend.html");
 //
 //                                webView.getSettings().setJavaScriptEnabled(true);
 //                                webView.getSettings().setAllowContentAccess(true);

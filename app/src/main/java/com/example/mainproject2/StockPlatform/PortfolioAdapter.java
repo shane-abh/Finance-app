@@ -1,11 +1,14 @@
 package com.example.mainproject2.StockPlatform;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,7 +25,13 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import com.example.mainproject2.ExpenseManager.FirebaseAdapter;
 import com.example.mainproject2.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.MyViewHolder> {
     Context context;
@@ -51,6 +60,8 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.MyVi
         holder.date.setText(u.getDate());
         holder.buyPrice.setText("$"+u.getStName());
 
+
+
         OkHttpClient client = new OkHttpClient();
 
         String url ="https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="+u.getSymbol()+"&apikey=OOEPKQDKWRUGS4HV";
@@ -72,11 +83,11 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.MyVi
                     ((MyPortfolioActivity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-//                            json.add(myRes);
-                                        System.out.println(myRes);
+
+                             System.out.println(myRes);
                             try {
                                 String close = new JSONObject(myRes).getJSONObject("Global Quote").getString("05. price");
-//                                            System.out.println(close);
+
                                 DecimalFormat df = new DecimalFormat("#.##");
                                 String price =  df.format(Double.parseDouble(close));
 
@@ -111,6 +122,47 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.MyVi
         });
         holder.prevClose.setText(u.getPrice());
 
+        String key = u.getKey();
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+          @Override
+          public boolean onLongClick(View v) {
+              AlertDialog dialog = new AlertDialog.Builder(context)
+                      .setCancelable(false)
+                      .setTitle("Are you sure? The transaction will be deleted.")
+                      .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                          @Override
+                          public void onClick(DialogInterface dialogInterface, int i) {
+                              dialogInterface.dismiss();
+                          }
+                      }).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                          @Override
+                          public void onClick(DialogInterface dialog, int which) {
+                              list.remove(holder.getAdapterPosition());
+                              MyPortfolioFirebaseAdapter fb = new MyPortfolioFirebaseAdapter();
+                              System.out.println(key);
+                              fb.remove(u.getKey()).addOnCompleteListener(task -> {
+                                  System.out.println("hello3");
+                                  if (task.isSuccessful()) {
+                                      Toast.makeText(context, "Data deleted", Toast.LENGTH_SHORT).show();
+                                      notifyItemRemoved(holder.getAdapterPosition());
+                                  } else {
+                                      Toast.makeText(context, "Data not deleted", Toast.LENGTH_SHORT).show();
+                                  }
+                              });
+                              dialog.dismiss();
+                              notifyDataSetChanged();
+                              notifyItemRangeChanged(holder.getAdapterPosition(), getItemCount(), null);
+                          }
+                      }).create();
+
+              dialog.show();
+
+
+
+              return false;
+          }
+      });
+
     }
 
     @Override
@@ -118,7 +170,7 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.MyVi
         return list.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder  {
 
         TextView symbol,qty,buyPrice,date,prevClose,pchange;
 
@@ -132,7 +184,11 @@ public class PortfolioAdapter extends RecyclerView.Adapter<PortfolioAdapter.MyVi
             prevClose = itemView.findViewById(R.id.PrevClose);
             pchange = itemView.findViewById(R.id.pchange);
 
+
+
         }
+
+
     }
 }
 

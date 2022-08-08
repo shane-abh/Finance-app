@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.mainproject2.ExpenseManager.ExpenseCalculatorMain;
+import com.example.mainproject2.ExpenseManager.FirebaseAdapter;
 import com.example.mainproject2.PaymentReminder.DashBoardActivity;
 import com.example.mainproject2.ProfileActivity;
 import com.example.mainproject2.R;
@@ -41,6 +42,9 @@ public class MyPortfolioActivity extends AppCompatActivity {
     FloatingActionButton fab;
     SwipeRefreshLayout refresh;
 
+    MyPortfolioFirebaseAdapter fb;
+    String key = null;
+
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
     NavigationView nav_view;
@@ -61,6 +65,8 @@ public class MyPortfolioActivity extends AppCompatActivity {
         nav_view = findViewById(R.id.nav_view);
         Navigation_drawer();
 
+        fb = new MyPortfolioFirebaseAdapter();
+
         drawerLayout = findViewById(R.id.my_drawer_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
@@ -71,7 +77,7 @@ public class MyPortfolioActivity extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child(user.getDisplayName()).child("My Portfolio");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child("My Portfolio");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -91,13 +97,16 @@ public class MyPortfolioActivity extends AppCompatActivity {
 
 
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        fb.get(key).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list.clear();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     userStocks u = dataSnapshot.getValue(userStocks.class);
                     String sym = u.getSymbol();
                     System.out.println(sym);
+                    key = dataSnapshot.getKey();
+                    u.setKey(key);
 
 
                     list.add(u);
@@ -137,6 +146,11 @@ public class MyPortfolioActivity extends AppCompatActivity {
                 refresh.setRefreshing(false);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
     }
 
     public void Navigation_drawer(){

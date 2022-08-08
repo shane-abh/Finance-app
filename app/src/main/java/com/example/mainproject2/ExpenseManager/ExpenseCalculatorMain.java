@@ -7,13 +7,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.mainproject2.AccountActivity;
 import com.example.mainproject2.PaymentReminder.DashBoardActivity;
 import com.example.mainproject2.ProfileActivity;
 import com.example.mainproject2.R;
@@ -39,15 +43,18 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ExpenseCalculatorMain extends AppCompatActivity {
 
     PieChart pieChart;
 //    TransactionAdapter adapter;
     ArrayList<FinancialsClass> transactionList;
-    TextView details;
+    TextView details,summary,balancetrend;
 
     double income,expense;
+
 
 
     FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -63,6 +70,8 @@ public class ExpenseCalculatorMain extends AppCompatActivity {
     FirebaseAdapter fb;
     String key = null;
 
+    ProgressBar progressBar;
+
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
     NavigationView nav_view;
@@ -71,7 +80,7 @@ public class ExpenseCalculatorMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_calculator_main);
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
 
 
         nav_view = findViewById(R.id.nav_view);
@@ -85,7 +94,13 @@ public class ExpenseCalculatorMain extends AppCompatActivity {
         getSupportActionBar().setTitle("Expense Manager");
 
 
+
+
+
         details = findViewById(R.id.Details);
+        summary = findViewById(R.id.summarytv);
+        balancetrend = findViewById(R.id.balancetv);
+
         details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,26 +116,33 @@ public class ExpenseCalculatorMain extends AppCompatActivity {
 
         fb = new FirebaseAdapter();
 
+        progressBar = findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.VISIBLE);
+
         loadfbData();
 
-
         webView = findViewById(R.id.webview);
-//        webView.loadUrl("file:///android_asset/graph.html");
-//
-//        webView.getSettings().setJavaScriptEnabled(true);
-//        webView.getSettings().setAllowContentAccess(true);
-//        webView.getSettings().setAllowFileAccess(true);
-//        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-//
-//        webView.getSettings().setAppCacheEnabled(true);
-//        webView.getSettings().setDatabaseEnabled(true);
-//
-//
-//        webView.getSettings().setAllowFileAccessFromFileURLs(true);
-//        webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
-//        webView.getSettings().setDomStorageEnabled(true);
+//        checkIfEmpty(transactionList.size());
+
+
+        pieChart.setVisibility(View.INVISIBLE);
+        webView.setVisibility(View.INVISIBLE);
+        details.setVisibility(View.GONE);
+        balancetrend.setVisibility(View.GONE);
+        summary.setVisibility(View.GONE);
+
+
 
     }
+
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+        startActivity(intent);
+
+    }
+
 
     private void initPieChart(){
         //using percentage as values instead of amount
@@ -154,8 +176,30 @@ public class ExpenseCalculatorMain extends AppCompatActivity {
 
     }
 
+    public void checkIfEmpty(int size) {
+        if (size == 0)
+        {
+            System.out.println("List is empty");
+            pieChart.setVisibility(View.INVISIBLE);
+            webView.setVisibility(View.INVISIBLE);
+            details.setVisibility(View.GONE);
+            balancetrend.setVisibility(View.GONE);
+            summary.setVisibility(View.GONE);
+            Intent intent = new Intent(getApplicationContext(),ExpenseDetails.class);
+            startActivity(intent);
+        }
+        else {
+            System.out.println("List is not empty");
+            pieChart.setVisibility(View.VISIBLE);
+            details.setVisibility(View.VISIBLE);
+            webView.setVisibility(View.VISIBLE);
+            balancetrend.setVisibility(View.VISIBLE);
+            summary.setVisibility(View.VISIBLE);
+        }
+    }
+
     public void loadfbData(){
-        Query q = db.getReference().child("Users").child(user.getUid()).child(user.getDisplayName()).child("Expense Management").orderByChild("date");
+        Query q = db.getReference().child("Users").child(user.getUid()).child("Expense Management").orderByChild("date");
 
         q.addValueEventListener(new ValueEventListener() {
             @Override
@@ -181,34 +225,37 @@ public class ExpenseCalculatorMain extends AppCompatActivity {
 
 
                 }
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        webView.loadUrl("file:///android_asset/trial.html");
-
-                        webView.getSettings().setJavaScriptEnabled(true);
-                        webView.getSettings().setAllowContentAccess(true);
-                        webView.getSettings().setAllowFileAccess(true);
-                        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-
-                        webView.getSettings().setAppCacheEnabled(true);
-                        webView.getSettings().setDatabaseEnabled(true);
+                checkIfEmpty(transactionList.size());
 
 
-                        webView.getSettings().setAllowFileAccessFromFileURLs(true);
-                        webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
-                        webView.getSettings().setDomStorageEnabled(true);
 
-                        webView.setWebViewClient(new WebViewClient() {
+                  runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                webView.loadUrl("file:///android_asset/BalanceTrend.html");
 
-                            public void onPageFinished(WebView view, String url) {
-                                view.loadUrl("javascript:init("+date+","+balance+")");
+                                webView.getSettings().setJavaScriptEnabled(true);
+                                webView.getSettings().setAllowContentAccess(true);
+                                webView.getSettings().setAllowFileAccess(true);
+                                webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+
+                                webView.getSettings().setAppCacheEnabled(true);
+                                webView.getSettings().setDatabaseEnabled(true);
+
+
+                                webView.getSettings().setAllowFileAccessFromFileURLs(true);
+                                webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
+                                webView.getSettings().setDomStorageEnabled(true);
+
+                                webView.setWebViewClient(new WebViewClient() {
+
+                                    public void onPageFinished(WebView view, String url) {
+                                        view.loadUrl("javascript:init(" + date + "," + balance + ")");
+                                    }
+                                });
+                                System.out.println("Date: " + date);
                             }
                         });
-                        System.out.println("Date: "+date);
-                    }
-                });
 
                 String label = "";
                 //initializing colors for the entries
@@ -236,6 +283,7 @@ public class ExpenseCalculatorMain extends AppCompatActivity {
                 pieChart.setData(pieData);
                 pieChart.invalidate();
 
+                progressBar.setVisibility(View.GONE);
 
             }
 
@@ -332,6 +380,11 @@ public class ExpenseCalculatorMain extends AppCompatActivity {
                     case R.id.nav_reminder:
                         Intent intent6 = new Intent(getApplicationContext(), DashBoardActivity.class);
                         startActivity(intent6);
+                        return true;
+
+                    case R.id.nav_account:
+                        Intent intent7 = new Intent(getApplicationContext(), AccountActivity.class);
+                        startActivity(intent7);
                         return true;
 
 

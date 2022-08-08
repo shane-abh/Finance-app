@@ -28,6 +28,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.mainproject2.AccountActivity;
 import com.example.mainproject2.ExpenseManager.ExpenseCalculatorMain;
 import com.example.mainproject2.ProfileActivity;
 import com.example.mainproject2.R;
@@ -119,6 +120,11 @@ public class DashBoardActivity extends AppCompatActivity implements TasksFragmen
                     case R.id.nav_reminder:
                         Intent intent6 = new Intent(getApplicationContext(), DashBoardActivity.class);
                         startActivity(intent6);
+                        return true;
+
+                    case R.id.nav_account:
+                        Intent intent7 = new Intent(getApplicationContext(), AccountActivity.class);
+                        startActivity(intent7);
                         return true;
 
 
@@ -401,7 +407,8 @@ class TaskListAdapter extends BaseAdapter {
         PendingIntent sender;
         Intent intent;
 
-        Log.d(TAG, "Setting task to alarm at " + task.getDate() + (task.getEnabled() ? " enabled" : "") + (task.getOutdated() ? " outdated" : ""));
+        Log.d(TAG, "Setting task to remind at " + task.getDate() + (task.getEnabled() ? " enabled" : "")
+                + (task.getOutdated() ? " outdated" : ""));
 
         if (task.getEnabled() && !task.getOutdated())
         {
@@ -409,7 +416,6 @@ class TaskListAdapter extends BaseAdapter {
             task.toIntent(intent);
             sender = PendingIntent.getBroadcast(context, (int)task.getId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, task.getDate(), sender);
-
 
             switch (task.getRepeat()){
                 case "Monthly": alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, task.getDate(),
@@ -424,15 +430,8 @@ class TaskListAdapter extends BaseAdapter {
                 case "None" :
                     Toast.makeText(context, task.getRepeat().toString(), Toast.LENGTH_LONG);
 
-
             }
 
-//            if(task.getRepeat().toString()=="Monthly"){
-//                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, task.getDate(),
-//                        1000 * 10 * 1, sender);
-//                Toast.makeText(context, task.getRepeat().toString(), Toast.LENGTH_LONG);
-//                System.out.println("Testing1: "+task.getRepeat());
-//            }
 
         }
     }

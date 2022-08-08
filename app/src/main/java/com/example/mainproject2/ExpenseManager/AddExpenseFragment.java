@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,11 +39,11 @@ public class AddExpenseFragment extends Fragment {
     }
 
     Spinner spinner;
-    String[] paths = {"Food", "Electronics", "Entertainment","Health","Bills","Savings","Shopping","Housing","Transportation",
+    String[] paths = {"--Select Category--","Food", "Electronics", "Entertainment","Health","Bills","Savings","Shopping","Housing","Transportation",
             "Vehicle","Financial Expenses","Loan","Others"};
 
     Calendar myCalendar= Calendar.getInstance();
-    EditText editText,amount,mess;
+    EditText dateEdt,amount,mess;
     Button btn;
     boolean positive = false;
     TextView tvSign,inc_exp;
@@ -69,7 +70,7 @@ public class AddExpenseFragment extends Fragment {
         amount = view.findViewById(R.id.amount);
         amount.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5, 2)});
         mess = view.findViewById(R.id.message);
-        editText = view.findViewById(R.id.Date);
+        dateEdt = view.findViewById(R.id.Date);
         btn = view.findViewById(R.id.btn);
         tvSign = view.findViewById(R.id.tvSign);
         inc_exp = view.findViewById(R.id.inc_exp);
@@ -90,7 +91,7 @@ public class AddExpenseFragment extends Fragment {
                 updateLabel();
             }
         };
-        editText.setOnClickListener(new View.OnClickListener() {
+        dateEdt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new DatePickerDialog(getContext(),date,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -102,77 +103,79 @@ public class AddExpenseFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FirebaseAdapter fb = new FirebaseAdapter();
-//                FinancialsClass a = new FinancialsClass();
+                
+                if(amount.getText().toString().isEmpty()){
+                    amount.setError("Enter amount");
+                }else if( mess.getText().toString().isEmpty()){
+                    mess.setError("Enter a note");
+                } else if( dateEdt.getText().toString().isEmpty()){
+                    dateEdt.setError("Choose date");
+                } else if(spinner.getSelectedItem().equals("--Select Category--")){
+                    Toast.makeText(getContext(), "Select a category", Toast.LENGTH_SHORT).show();
+                }else {
 
-//                a.setAmount(amount.getText().toString());
-//                a.setCategory(spinner.getSelectedItem().toString());
-//                a.setDate(editText.getText().toString());
-//                a.setMessage(mess.getText().toString());
-//                a.setPositive(positive);
-
-
-                fb.get(key).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        transactionList.clear();
-                        FinancialsClass a = new FinancialsClass();
-                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                            FinancialsClass t = dataSnapshot.getValue(FinancialsClass.class);
-                            key = dataSnapshot.getKey();
-                            t.setKey(key);
-                            transactionList.add(t);
-                        }
-                        System.out.println(calculateBalance(transactionList));
-                        double bal = calculateBalance(transactionList);
-                        String income = calculateIncome(transactionList);
-                        String expense = calculateExpense(transactionList);
-                        if(!positive) {
-                            if (Double.parseDouble(amount.getText().toString()) > bal) {
-                                System.out.println("DONT ADD");
-                                Toast.makeText(getContext(),"Insufficient balance",Toast.LENGTH_LONG).show();
-                                new AlertDialog.Builder(getContext())
-                                        .setTitle("Warning!")
-                                        .setIcon(R.drawable.warning)
-                                        .setPositiveButton("Ok", null)
-                                        .setMessage( "Insufficient balance" )
-                                        .show();
-
-                            }else{
-                                System.out.println("ADD");
-                                a.setAmount(amount.getText().toString());
-                                a.setCategory(spinner.getSelectedItem().toString());
-                                a.setDate(editText.getText().toString());
-                                a.setMessage(mess.getText().toString());
-                                a.setPositive(positive);
-                                a.setBalance(String.valueOf(bal));
-                                a.setIncome(income);
-                                a.setExpense(expense);
-                                System.out.println("Added");
-                                FirebaseAdapter fb2 = new FirebaseAdapter();
-                                fb2.add(a).addOnCompleteListener(task -> {
-
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText((getContext()), "Data inserted", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getContext(),ExpenseDetails.class);
-                                        startActivity(intent);
-                                    } else {
-                                        Toast.makeText((getContext()), "Data not inserted", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                    fb.get(key).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            transactionList.clear();
+                            FinancialsClass a = new FinancialsClass();
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                FinancialsClass t = dataSnapshot.getValue(FinancialsClass.class);
+                                key = dataSnapshot.getKey();
+                                t.setKey(key);
+                                transactionList.add(t);
                             }
+                            System.out.println(calculateBalance(transactionList));
+                            double bal = calculateBalance(transactionList);
+                            String income = calculateIncome(transactionList);
+                            String expense = calculateExpense(transactionList);
+                            if (!positive) {
+                                if (Double.parseDouble(amount.getText().toString()) > bal) {
+                                    System.out.println("DONT ADD");
+                                    Toast.makeText(getContext(), "Insufficient balance", Toast.LENGTH_LONG).show();
+                                    new AlertDialog.Builder(getContext())
+                                            .setTitle("Warning!")
+                                            .setIcon(R.drawable.warning)
+                                            .setPositiveButton("Ok", null)
+                                            .setMessage("Insufficient balance")
+                                            .show();
+
+                                } else {
+                                    System.out.println("ADD");
+                                    double amt = Double.parseDouble(amount.getText().toString());
+                                    a.setAmount(amount.getText().toString());
+                                    a.setCategory(spinner.getSelectedItem().toString());
+                                    a.setDate(dateEdt.getText().toString());
+                                    a.setMessage(mess.getText().toString());
+                                    a.setPositive(positive);
+                                    a.setBalance(String.valueOf(bal - amt));
+                                    a.setIncome(income);
+                                    a.setExpense(expense);
+                                    System.out.println("Added");
+                                    FirebaseAdapter fb2 = new FirebaseAdapter();
+                                    fb2.add(a).addOnCompleteListener(task -> {
+
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText((getContext()), "Data inserted", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(getContext(), ExpenseDetails.class);
+                                            startActivity(intent);
+                                        } else {
+                                            Toast.makeText((getContext()), "Data not inserted", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }
+
                         }
 
-                    }
 
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
+                        }
+                    });
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-
+                }
 
 
 
@@ -224,7 +227,7 @@ public class AddExpenseFragment extends Fragment {
     private void updateLabel() {
         String myFormat = "MM/dd/yyyy";
         SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.ENGLISH);
-        editText.setText(dateFormat.format(myCalendar.getTime()));
+        dateEdt.setText(dateFormat.format(myCalendar.getTime()));
     }
 
 }

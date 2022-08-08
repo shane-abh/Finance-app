@@ -119,8 +119,8 @@ public class EditActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_INSERT);
                 intent.setData(CalendarContract.Events.CONTENT_URI);
-                intent.putExtra(CalendarContract.Events.TITLE, task.getName());
-                String desc = "AED "+ task.getAmount() + " to be paid for " + task.getCategory();
+                intent.putExtra(CalendarContract.Events.TITLE, name.getText().toString());
+                String desc = "AED "+ amount.getText() + " to be paid for " + name.getText().toString();
                 intent.putExtra(CalendarContract.Events.DESCRIPTION,desc);
                 intent.putExtra(CalendarContract.Events.ALL_DAY,true);
 
@@ -136,8 +136,7 @@ public class EditActivity extends AppCompatActivity {
                     intent.putExtra(CalendarContract.Events.RRULE,rrule);
                 } else if (radioButton.getText().toString().contentEquals("Daily")){
                     rrule = "FREQ=DAILY;";
-                    intent.putExtra(CalendarContract.Events.RRULE,rrule);
-                }
+                    intent.putExtra(CalendarContract.Events.RRULE,rrule);                }
 
 
 
@@ -198,16 +197,13 @@ public class EditActivity extends AppCompatActivity {
             radioButton = findViewById(selectedID);
 
             task.setRepeat(radioButton.getText().toString());
-//            Toast.makeText(this,radioButton.getText(),Toast.LENGTH_SHORT).show();
-        }
 
+        }
         if (errorMessage!=null){
             Toast toast = Toast.makeText(this, errorMessage, Toast.LENGTH_LONG);
             toast.show();
             return;
         }
-
-
 
         Intent intent = new Intent();
         intent.putExtra(CalendarContract.Reminders.MINUTES,"10");
